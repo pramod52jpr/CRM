@@ -1,0 +1,40 @@
+.filterContainer{
+    display: flex;
+}
+.filterContainer form{
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    margin: 10px;
+    padding: 10px;
+}
+.filterContainer form input[Type="date"],.filterContainer form select{
+    width: 47%;
+    margin: 5px;
+}
+.filterContainer form input[Type="radio"]{
+    width: 15px;
+}
+.filterContainer form label{
+    width: auto;
+}
+.filterContainer form .radio{
+    display: flex;
+    align-items: center;
+    font-size: 15px;
+    margin-left: 10px;
+}
+.filterContainer form .save{
+    width: 100%;
+}
+
+@media screen and (max-width:740px){
+    .filterContainer form input[Type="date"],.filterContainer form select{
+        width: 46%;
+    }
+}
+@media screen and (max-width:570px){
+    .filterContainer form input[Type="date"],.filterContainer form select{
+        width: 100%;
+    }
+}

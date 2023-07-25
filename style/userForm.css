@@ -1,0 +1,133 @@
+form{
+    overflow: auto;
+    margin: 20px;
+    background-color: rgba(255, 255, 255,0.8);
+    padding:30px 20px 50px 20px;
+    font-family: 'Ubuntu', sans-serif;
+    border-radius: 10px;
+    margin-top: 50px;
+}
+form .title{
+    margin-bottom: 10px;
+    margin-left: 20px;
+    font-size: 25px;
+    font-weight: bold;
+    color: rgb(61, 61, 61);
+    text-transform: uppercase;
+}
+form .upper{
+    margin: 20px;
+    display: flex;
+}
+form .lower{
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+form label{
+    padding: 5px;
+    width: 100px;
+    font-size: 20px;
+}
+form textarea{
+    width: 100%;
+    resize: none;
+    padding: 10px;
+    font-size: 20px;
+    font-family: 'Ubuntu', sans-serif;
+    border-radius: 5px;
+    border: 1px solid black;
+    outline: none;
+}
+form input,form select{
+    padding: 0px 10px;
+    font-size: 20px;
+    font-family: 'Ubuntu', sans-serif;
+    height: 40px;
+    border-radius: 5px;
+    border: 1px solid black;
+    outline: none;
+    width: 70%;
+}
+form select{
+    width: 74%;
+}
+form input[Type="checkbox"]{
+    height: 16px;
+}
+form .save{
+    text-align: center;
+    margin-top: 20px;
+}
+form input[Type="submit"],form .save a{
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    font-family: 'Ubuntu', sans-serif;
+    width: min-content;
+    height: min-content;
+    padding: 5px 15px;
+    font-size: 20px;
+    color: white;
+    background-color: blue;
+}
+form input[Type="submit"]:hover{
+    background-color: rgb(0, 0, 158);
+}
+form .save a{
+    background-color: red;
+}
+form .save a:hover{
+    background-color: rgb(165, 0, 0);
+}
+.assignContainer{
+    margin: 10px;
+    padding: 10px;
+    border-radius: 10px;
+    background-color: rgba(255, 255, 255, 0.8);
+    font-family: 'Ubuntu', sans-serif;
+}
+
+@media screen and (max-width:930px){
+    form input,form select{
+        width: 60%;
+    }
+    form select{
+        width: 66%;
+    }
+}
+@media screen and (max-width:720px){
+    form .upper{
+        margin: 0;
+        margin: 0px 30px 0px 10px;
+        flex-direction: column;
+    }
+    form .lower{
+        margin: 10px;
+    }
+    form input,form select{
+        width: 70%;
+    }
+    form select{
+        width: 73%;
+    }
+}
+
+@media screen and (max-width:500px){
+    form .title{
+        margin-left: 10px;
+        font-size: 18px;
+    }
+    form .lower{
+        margin: 5px 0px;
+        align-items: flex-start;
+        flex-direction: column;
+    }
+    form input,form select{
+        width: 94%;
+    }
+    form select{
+        width: 100%;
+    }
+}
