@@ -14,13 +14,22 @@ class Conn{
 
 // read method
 
-    public function read($table,$column="*",$where=null,$join=null){
+    public function read($table,$column="*",$where=null,$join=null,$offset=null,$limit=null,$groupby=null,$orderby=null){
         $sql="select $column from $table";
         if($join!=null){
             $sql.=" join $join";
         }
         if($where!=null){
             $sql.=" where $where";
+        }
+        if($groupby!=null){
+            $sql.=" group by $groupby";
+        }
+        if($orderby!=null){
+            $sql.=" order by $orderby";
+        }
+        if($limit!=null and $offset!=null){
+            $sql.=" limit $offset,$limit";
         }
         $result=$this->conn->query($sql);
         return $result;
@@ -49,8 +58,15 @@ class Conn{
 
 // delete method
 
-    public function delete($table,$where){
-        $result=$this->conn->query("delete from $table where $where");
+    public function delete($table,$where=null,$deleteTable=null,$join=null){
+        $sql="delete from $table";
+        if($deleteTable!=null && $join!=null){
+            $sql="delete $deleteTable from $table join $join";
+        }
+        if($where!=null){
+            $sql.=" where $where";
+        }
+        $result=$this->conn->query($sql);
         return $result;
     }
     public function __destruct(){

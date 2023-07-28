@@ -3,34 +3,6 @@
 if($loginRow['category']!=1){
     header("Location: dashboard.php");
 }
-if(isset($_POST['uid'])){
-    $uid=$_POST['uid'];
-    $date=date("Y-m-d");
-    
-    $readAssignData=$conn->delete("calldetails","`userId`=$uid and `date`='$date'");
-    if(isset($_POST['check'])){
-        $check=$_POST['check'];
-        foreach($check as $value){
-            $dataArray=[
-                "userId"=>$uid,
-                "clients"=>$value,
-                "date"=>$date
-            ];
-            $result=$conn->insert("calldetails",$dataArray);
-        }
-        if($readAssignData && $result){
-            echo "<script>alert('Clients Assigned Successfully')</script>";
-        }else{
-            echo "<script>alert('Clients Assignment Failed')</script>";
-        }
-    }else{
-        if($readAssignData){
-            echo "<script>alert('Clients Assignment Updated Successfully')</script>";
-        }else{
-            echo "<script>alert('Clients Assignment Updation Failed')</script>";
-        }
-    }
-}
 ?>
 <div class="usersPage">
     <h2 style="margin:10px 0px">Assign Clients</h2>

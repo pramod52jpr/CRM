@@ -18,8 +18,8 @@ session_abort();
     <title>Customer Relation Management</title>
     <link rel="stylesheet" href="./style/header.css">
     <link rel="stylesheet" href="./style/dashboard.css">
-    <link rel="stylesheet" href="./style/users.css">
     <link rel="stylesheet" href="./style/userForm.css">
+    <link rel="stylesheet" href="./style/users.css">
     <link rel="stylesheet" href="./style/reports.css">
 </head>
 <body>
