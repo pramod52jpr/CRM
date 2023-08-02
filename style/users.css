@@ -43,15 +43,20 @@
     width: 100%;
 }
 .tableContainer table th{
+    text-align: left;
     letter-spacing: 2px;
     background-color: black;
     color: white;
-    padding: 10px 0px;
+    padding: 10px;
 }
 .tableContainer table tr td{
+    text-align: left;
     letter-spacing: 1px;
     font-family: 'Ubuntu', sans-serif;
-    padding: 5px;
+    padding: 10px;
+}
+.tableContainer table tr td:last-child{
+    display: flex;
 }
 .tableContainer table tr:nth-child(even){
     background-color: rgba(98, 98, 255,0.8);

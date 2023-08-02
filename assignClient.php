@@ -28,7 +28,7 @@ if(isset($_POST['page'])){
 $clientCount=$conn->read("client","*",$where);
 $totalClients=$clientCount->num_rows;
 $offset=0;
-$limit=20;
+$limit=40;
 $pages=ceil($totalClients/$limit);
 
 if(isset($_POST['page'])){

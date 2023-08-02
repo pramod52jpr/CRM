@@ -16,6 +16,7 @@ $conn=new Conn();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Customer Relation Management</title>
     <link rel="stylesheet" href="./style/login.css">
+    <link rel="shortcut icon" href="https://media.smallbiztrends.com/2013/08/benefits-of-crm.jpg" type="image/x-icon">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">

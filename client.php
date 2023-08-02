@@ -32,6 +32,7 @@ if(isset($_POST['name']) && isset($_POST['address'])){
 }
 if(isset($_POST['cuid']) && isset($_POST['updatedName']) && isset($_POST['updatedAddress'])){
     $cuid=$_POST['cuid'];
+    $updatedName=$_POST['updatedName'];
     extract($_POST);
     $dataArray=array(
         "Name"=>$updatedName,
@@ -45,11 +46,16 @@ if(isset($_POST['cuid']) && isset($_POST['updatedName']) && isset($_POST['update
         "State"=>$updatedState,
         "GST"=>$updatedGst
     );
-    $result=$conn->update("client",$dataArray,"`Client_Id`=$cuid");
-    if($result){
-        echo "<script>alert('Client Updated Successfully')</script>";
+    $readData=$conn->read("client","`Name`","`Name`='$updatedName'");
+    if($readData->num_rows==0){
+        $result=$conn->update("client",$dataArray,"`Client_Id`=$cuid");
+        if($result){
+            echo "<script>alert('Client Updated Successfully')</script>";
+        }else{
+            echo "<script>alert('Client Updation Failed')</script>";
+        }
     }else{
-        echo "<script>alert('Client Updation Failed')</script>";
+        echo "<script>alert('This client is already registered! Try a different name')</script>";
     }
 }
 if(isset($_GET['cdid'])){

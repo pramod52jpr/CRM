@@ -16,6 +16,7 @@ session_abort();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Customer Relation Management</title>
+    <link rel="shortcut icon" href="https://media.smallbiztrends.com/2013/08/benefits-of-crm.jpg" type="image/x-icon">
     <link rel="stylesheet" href="./style/header.css">
     <link rel="stylesheet" href="./style/dashboard.css">
     <link rel="stylesheet" href="./style/userForm.css">
