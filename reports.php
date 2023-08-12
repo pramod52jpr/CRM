@@ -26,6 +26,9 @@ if(isset($_POST['radio'])){
             $users=$conn->read("users");
             if($users->num_rows>0){
                 while($userRow=$users->fetch_assoc()){
+                    if($userRow['category']==1){
+                        continue;
+                    }
                     if($userRow['User_Id']==$_POST['user']){
                         $selected="selected";
                     }else{

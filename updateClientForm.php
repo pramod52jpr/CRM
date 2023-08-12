@@ -8,25 +8,30 @@ if(isset($_GET['cuid'])){
 ?>
 <form action="client.php" method="post">
     <div class="title">Add Client</div>
+    <?php
+    if(isset($_GET['input'])){
+        echo $_GET['input'];
+    }
+    ?>
     <input type="hidden" name="cuid" value="<?php echo isset($_GET['cuid'])?$_GET['cuid']:'' ?>">
     <div class="upper">
         <div class="lower">
             <label for="updatedName">Name </label>
-            <input type="text" value="<?php echo $row['Name'] ?>" name="updatedName" id="updatedName" placeholder="Enter Name" required>
+            <input type="text" value="<?php echo $row['Name'] ?>" name="updatedName" id="updatedName" placeholder="Enter Name">
         </div>
         <div class="lower">
             <label for="updatedAddress">Address </label>
-            <input type="text" value="<?php echo $row['Address'] ?>" name="updatedAddress" id="updatedAddress" placeholder="Enter Address" required>
+            <input type="text" value="<?php echo $row['Address'] ?>" name="updatedAddress" id="updatedAddress" placeholder="Enter Address">
         </div>
     </div>
     <div class="upper">
         <div class="lower">
             <label for="updatedPerson">Person </label>
-            <input type="text" value="<?php echo $row['Contact_Person'] ?>" name="updatedPerson" id="updatedPerson" placeholder="Enter Contact Person Name" required>
+            <input type="text" value="<?php echo $row['Contact_Person'] ?>" name="updatedPerson" id="updatedPerson" placeholder="Enter Contact Person Name">
         </div>
         <div class="lower">
             <label for="updatedCategory">Category </label>
-            <select name="updatedCategory" id="updatedCategory" required>
+            <select name="updatedCategory" id="updatedCategory">
                 <option value=""selected disabled>Select Category</option>
             <?php
             $result=$conn->read("clientcategory");
@@ -49,7 +54,7 @@ if(isset($_GET['cuid'])){
     <div class="upper">
         <div class="lower">
             <label for="updatedMobile">Mobile No. </label>
-            <input type="text" value="<?php echo $row['Mobile'] ?>" name="updatedMobile" id="updatedMobile" placeholder="Enter Mobile No." required>
+            <input type="text" value="<?php echo $row['Mobile'] ?>" name="updatedMobile" id="updatedMobile" placeholder="Enter Mobile No.">
         </div>
         <div class="lower">
             <label for="updatedLandline">Landline </label>
@@ -59,7 +64,7 @@ if(isset($_GET['cuid'])){
     <div class="upper">
         <div class="lower">
             <label for="updatedEmail">Email Id </label>
-            <input type="email" value="<?php echo $row['Email'] ?>" name="updatedEmail" id="updatedEmail" placeholder="Enter Email Id" required>
+            <input type="email" value="<?php echo $row['Email'] ?>" name="updatedEmail" id="updatedEmail" placeholder="Enter Email Id">
         </div>
         <div class="lower">
             <label for="updatedCity">City </label>
@@ -88,7 +93,12 @@ if(isset($_GET['cuid'])){
     </div>
     <div class="save">
         <input type="submit" value="Update">
-        <a href="client.php">cancel</a>
     </div>
 </form>
+<div class="cancel">
+    <form action="client.php" method="post">
+        <?php echo $_GET['input'] ?>
+        <input type="submit" value="cancel">
+    </form>
+</div>
 <?php include "./components/footer.php"; ?>

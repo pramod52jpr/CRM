@@ -46,7 +46,7 @@ if(isset($_POST['cuid']) && isset($_POST['updatedName']) && isset($_POST['update
         "State"=>$updatedState,
         "GST"=>$updatedGst
     );
-    $readData=$conn->read("client","`Name`","`Name`='$updatedName'");
+    $readData=$conn->read("client","`Name`","`Name`='$updatedName' and `Client_Id`!=$cuid");
     if($readData->num_rows==0){
         $result=$conn->update("client",$dataArray,"`Client_Id`=$cuid");
         if($result){
@@ -86,7 +86,7 @@ if(isset($_GET['cid']) && isset($_GET['cact'])){
     }
 }
 
-$where="`Active`=1";
+$where="`Active`!=11";
 $whereCity=null;
 $input="";
 if(isset($_POST['state'])){
@@ -228,7 +228,7 @@ if(isset($_POST['page'])){
                             } ?>
                         </td>
                         <td>
-                            <a href="updateClientForm.php?cuid=<?php echo $row['Client_Id'] ?>"><i class="fa-sharp fa-solid fa-pen"></i></a>
+                            <a href="updateClientForm.php?cuid=<?php echo $row['Client_Id'] ?>&input=<?php echo $input ?>"><i class="fa-sharp fa-solid fa-pen"></i></a>
                             <a href="?cdid=<?php echo $row['Client_Id'] ?>" style="pointer-events:none;"><i class="fa-solid fa-trash"></i></a>
                         </td>
                     </tr>

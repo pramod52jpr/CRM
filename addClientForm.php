@@ -4,21 +4,21 @@
     <div class="upper">
         <div class="lower">
             <label for="name">Name </label>
-            <input type="text" name="name" id="name" placeholder="Enter Name" required>
+            <input type="text" name="name" id="name" placeholder="Enter Name">
         </div>
         <div class="lower">
             <label for="address">Address </label>
-            <input type="text" name="address" id="address" placeholder="Enter Address" required>
+            <input type="text" name="address" id="address" placeholder="Enter Address">
         </div>
     </div>
     <div class="upper">
         <div class="lower">
             <label for="person">Person </label>
-            <input type="text" name="person" id="person" placeholder="Enter Contact Person Name" required>
+            <input type="text" name="person" id="person" placeholder="Enter Contact Person Name">
         </div>
         <div class="lower">
             <label for="category">Category </label>
-            <select name="category" id="category" required>
+            <select name="category" id="category">
                 <option value=""selected disabled>Select Category</option>
             <?php
             $result=$conn->read("clientcategory");
@@ -36,7 +36,7 @@
     <div class="upper">
         <div class="lower">
             <label for="mobile">Mobile No. </label>
-            <input type="text" name="mobile" id="mobile" placeholder="Enter Mobile No." required>
+            <input type="text" name="mobile" id="mobile" placeholder="Enter Mobile No.">
         </div>
         <div class="lower">
             <label for="landline">Landline </label>
@@ -46,7 +46,7 @@
     <div class="upper">
         <div class="lower">
             <label for="email">Email Id </label>
-            <input type="email" name="email" id="email" placeholder="Enter Email Id" required>
+            <input type="email" name="email" id="email" placeholder="Enter Email Id">
         </div>
         <div class="lower">
             <label for="city">City </label>
