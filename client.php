@@ -229,7 +229,7 @@ if(isset($_POST['page'])){
                         </td>
                         <td>
                             <a href="updateClientForm.php?cuid=<?php echo $row['Client_Id'] ?>&input=<?php echo $input ?>"><i class="fa-sharp fa-solid fa-pen"></i></a>
-                            <a href="?cdid=<?php echo $row['Client_Id'] ?>" style="pointer-events:none;"><i class="fa-solid fa-trash"></i></a>
+                            <a href="?cdid=<?php echo $row['Client_Id'] ?>"><i class="fa-solid fa-trash"></i></a>
                         </td>
                     </tr>
                     <?php
