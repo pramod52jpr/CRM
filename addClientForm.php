@@ -4,7 +4,7 @@
     <div class="upper">
         <div class="lower">
             <label for="name">Name </label>
-            <input type="text" name="name" id="name" placeholder="Enter Name">
+            <input type="text" name="name" id="name" placeholder="Enter Name" required>
         </div>
         <div class="lower">
             <label for="address">Address </label>
@@ -18,7 +18,7 @@
         </div>
         <div class="lower">
             <label for="category">Category </label>
-            <select name="category" id="category">
+            <select name="category" id="category" required>
                 <option value=""selected disabled>Select Category</option>
             <?php
             $result=$conn->read("clientcategory");
@@ -65,7 +65,7 @@
     </div>
     <div class="save">
         <input type="submit" value="Add">
-        <a href="client.php">cancel</a>
+        <a href="javascript:history.go(-1)">cancel</a>
     </div>
 </form>
 <?php include "./components/footer.php"; ?>

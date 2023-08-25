@@ -67,9 +67,9 @@ if(isset($_GET['cdid'])){
         echo "<script>alert('Client Deletion Failed')</script>";
     }
 }
-if(isset($_GET['cid']) && isset($_GET['cact'])){
-    $cid=$_GET['cid'];
-    $cact=$_GET['cact'];
+if(isset($_POST['cid']) && isset($_POST['cact'])){
+    $cid=$_POST['cid'];
+    $cact=$_POST['cact'];
     $date=date("Y-m-d");
     $updArray=$cact==1?array(
         "active"=>$cact,
@@ -89,18 +89,22 @@ if(isset($_GET['cid']) && isset($_GET['cact'])){
 $where="`Active`!=11";
 $whereCity=null;
 $input="";
-if(isset($_POST['state'])){
-    $where.=" and `State`='$_POST[state]'";
-    $whereCity="`State`='$_POST[state]'";
-    $input.="<input type='hidden' name='state' value='$_POST[state]'>";
+if(isset($_POST['selectedState'])){
+    $where.=" and `State`='$_POST[selectedState]'";
+    $whereCity="`State`='$_POST[selectedState]'";
+    $input.="<input type='hidden' name='selectedState' value='$_POST[selectedState]'>";
 }
-if(isset($_POST['city'])){
-    $where.=" and `City`='$_POST[city]'";
-    $input.="<input type='hidden' name='city' value='$_POST[city]'>";
+if(isset($_POST['selectedCity'])){
+    $where.=" and `City`='$_POST[selectedCity]'";
+    $input.="<input type='hidden' name='selectedCity' value='$_POST[selectedCity]'>";
 }
-if(isset($_POST['category'])){
-    $where.=" and `Category`=$_POST[category]";
-    $input.="<input type='hidden' name='category' value='$_POST[category]'>";
+if(isset($_POST['selectedCategory'])){
+    $where.=" and `Category`=$_POST[selectedCategory]";
+    $input.="<input type='hidden' name='selectedCategory' value='$_POST[selectedCategory]'>";
+}
+if(isset($_POST['search'])){
+    $where.=" and `Name` like '%$_POST[search]%'";
+    $input.="<input type='hidden' name='search' value='$_POST[search]'>";
 }
 if(isset($_POST['page'])){
     $input.="<input type='hidden' name='page' value='$_POST[page]'>";
@@ -119,15 +123,15 @@ if(isset($_POST['page'])){
 
 ?>
 <div class="filterContainer">
-    <form action="" method="post">
-        <select name="state" id="state">
+    <form action="client.php" method="post">
+        <select name="selectedState" id="selectedState">
             <option value="" selected disabled>Select State</option>
             <?php
             $users=$conn->read("client","*",null,null,null,null,"`State`");
             if($users->num_rows>0){
                 while($userRow=$users->fetch_assoc()){
-                    if(isset($_POST['state'])){
-                        if($userRow['State']==$_POST['state']){
+                    if(isset($_POST['selectedState'])){
+                        if($userRow['State']==$_POST['selectedState']){
                             $selected="selected";
                         }else{
                             $selected="";
@@ -142,14 +146,14 @@ if(isset($_POST['page'])){
             }
             ?>
         </select>
-        <select name="city" id="city">
+        <select name="selectedCity" id="selectedCity">
             <option value="" selected disabled>Select City</option>
             <?php
             $users=$conn->read("client","*",$whereCity,null,null,null,"`City`");
             if($users->num_rows>0){
                 while($userRow=$users->fetch_assoc()){
-                    if(isset($_POST['city'])){
-                        if($userRow['City']==$_POST['city']){
+                    if(isset($_POST['selectedCity'])){
+                        if($userRow['City']==$_POST['selectedCity']){
                             $selected="selected";
                         }else{
                             $selected="";
@@ -164,13 +168,13 @@ if(isset($_POST['page'])){
             }
             ?>
         </select>
-        <select name="category" id="category">
+        <select name="selectedCategory" id="selectedCategory">
             <option value="" selected disabled>Select Category</option>
             <?php
             $users=$conn->read("clientcategory");
             if($users->num_rows>0){
                 while($userRow=$users->fetch_assoc()){
-                    if($userRow['Category_Id']==$_POST['category']){
+                    if($userRow['Category_Id']==$_POST['selectedCategory']){
                         $selected="selected";
                     }else{
                         $selected="";
@@ -190,9 +194,18 @@ if(isset($_POST['page'])){
 </div>
 <div class="usersPage">
     <h2>Clients</h2>
-    <div class="add">
-        <a href="addClientForm.php">Add</a>
-        <hr color="white" width="100px" size="2px">
+    <div class="crudBtn">
+        <div class="add">
+            <a href="addClientForm.php">Add</a>
+            <hr color="green" width="100px" size="2px">
+        </div>
+        <div class="search">
+            <form action="client.php" method="post">
+                <?php echo $input ?>
+                <input type="text" name="search" value="<?php echo isset($_POST['search'])?$_POST['search']:"" ?>" placeholder="search">
+                <input type="submit" value="Search">
+            </form>
+        </div>
     </div>
     <div class="tableContainer">
         <table cellspacing="0">
@@ -219,16 +232,35 @@ if(isset($_POST['page'])){
                         <td>
                             <?php if($row['Active']==1){
                                 ?>
-                                <a href="?cid=<?php echo $row['Client_Id'] ?>&cact=0"><i class="fa-solid fa-toggle-on" style="color: #005eff;font-size:25px"></i></a>
+                                <div class="updateBtn">
+                                    <form action="client.php" method="post">
+                                        <?php echo $input ?>
+                                        <input type="hidden" name="cid" value="<?php echo $row['Client_Id'] ?>">
+                                        <input type="hidden" name="cact" value="0">
+                                        <button type="submit"><i class="fa-solid fa-toggle-on" style="color: #005eff;font-size:25px"></i></button>
+                                    </form>
+                                </div>
                                 <?php
                             }else{
                                 ?>
-                                <a href="?cid=<?php echo $row['Client_Id'] ?>&cact=1"><i class="fa-solid fa-toggle-off" style="color: #005eff;font-size:25px"></i></a>
+                                <div class="updateBtn">
+                                    <form action="client.php" method="post">
+                                        <?php echo $input ?>
+                                        <input type="hidden" name="cid" value="<?php echo $row['Client_Id'] ?>">
+                                        <input type="hidden" name="cact" value="1">
+                                        <button type="submit"><i class="fa-solid fa-toggle-off" style="color: #005eff;font-size:25px"></i></button>
+                                    </form>
+                                </div>
                                 <?php
                             } ?>
                         </td>
                         <td>
-                            <a href="updateClientForm.php?cuid=<?php echo $row['Client_Id'] ?>&input=<?php echo $input ?>"><i class="fa-sharp fa-solid fa-pen"></i></a>
+                            <div class="updateBtn">
+                                <form action="updateClientForm.php?cuid=<?php echo $row['Client_Id'] ?>" method="post">
+                                    <?php echo $input ?>
+                                    <button type="submit"><i class="fa-sharp fa-solid fa-pen"></i></button>
+                                </form>
+                            </div>
                             <a href="?cdid=<?php echo $row['Client_Id'] ?>"><i class="fa-solid fa-trash"></i></a>
                         </td>
                     </tr>
@@ -259,7 +291,7 @@ if(isset($_POST['page'])){
                 }
             }
             ?>
-            <form action="" method="post">
+            <form action="client.php" method="post">
                 <?php echo $input ?>
                 <input type="hidden" name="page" value="<?php echo $i ?>">
                 <input type="submit" value="<?php echo $i ?>" <?php echo $select ?>>

@@ -5,19 +5,31 @@ if(isset($_GET['cuid'])){
     $result=$conn->read("client","*","`Client_Id`=$cuid");
     $row=$result->fetch_assoc();
 }
+$input="";
+if(isset($_POST['selectedState'])){
+    $input.="<input type='hidden' name='selectedState' value='$_POST[selectedState]'>";
+}
+if(isset($_POST['selectedCity'])){
+    $input.="<input type='hidden' name='selectedCity' value='$_POST[selectedCity]'>";
+}
+if(isset($_POST['selectedCategory'])){
+    $input.="<input type='hidden' name='selectedCategory' value='$_POST[selectedCategory]'>";
+}
+if(isset($_POST['search'])){
+    $input.="<input type='hidden' name='search' value='$_POST[search]'>";
+}
+if(isset($_POST['page'])){
+    $input.="<input type='hidden' name='page' value='$_POST[page]'>";
+}
 ?>
 <form action="client.php" method="post">
     <div class="title">Add Client</div>
-    <?php
-    if(isset($_GET['input'])){
-        echo $_GET['input'];
-    }
-    ?>
+    <?php echo $input ?>
     <input type="hidden" name="cuid" value="<?php echo isset($_GET['cuid'])?$_GET['cuid']:'' ?>">
     <div class="upper">
         <div class="lower">
             <label for="updatedName">Name </label>
-            <input type="text" value="<?php echo $row['Name'] ?>" name="updatedName" id="updatedName" placeholder="Enter Name">
+            <input type="text" value="<?php echo $row['Name'] ?>" name="updatedName" id="updatedName" placeholder="Enter Name" required>
         </div>
         <div class="lower">
             <label for="updatedAddress">Address </label>
@@ -31,7 +43,7 @@ if(isset($_GET['cuid'])){
         </div>
         <div class="lower">
             <label for="updatedCategory">Category </label>
-            <select name="updatedCategory" id="updatedCategory">
+            <select name="updatedCategory" id="updatedCategory" required>
                 <option value=""selected disabled>Select Category</option>
             <?php
             $result=$conn->read("clientcategory");
@@ -93,12 +105,7 @@ if(isset($_GET['cuid'])){
     </div>
     <div class="save">
         <input type="submit" value="Update">
+        <a href="javascript:history.go(-1)">cancel</a>
     </div>
 </form>
-<div class="cancel">
-    <form action="client.php" method="post">
-        <?php echo $_GET['input'] ?>
-        <input type="submit" value="cancel">
-    </form>
-</div>
 <?php include "./components/footer.php"; ?>
