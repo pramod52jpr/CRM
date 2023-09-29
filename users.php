@@ -72,9 +72,11 @@ if(isset($_GET['uid']) && isset($_GET['uact'])){
 ?>
 <div class="usersPage">
     <h2>Users</h2>
-    <div class="add">
-        <a href="addUserForm.php">Add</a>
-        <hr color="white" width="100px" size="2px">
+    <div class="crudBtn">
+        <div class="add">
+            <a href="addUserForm.php">Add</a>
+            <hr color="white" width="100px" size="2px">
+        </div>
     </div>
     <div class="tableContainer">
         <table cellspacing="0">
